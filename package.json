@@ -1,0 +1,59 @@
+{
+  "name": "flo-graham-scan",
+  "description": "Function that finds the convex hull of a set of points via the Graham Scan algorithm.",
+  "version": "0.0.1",
+  "author": {
+    "name": "Floris Steenkamp"
+  },
+  "license": "MIT",
+  "main": "dist/flo-graham-scan.js",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlorisSteenkamp/FloGrahamScan.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FlorisSteenkamp/FloGrahamScan/issues"
+  },
+  "keywords": [
+    "Graham",
+    "scan",
+    "convex",
+    "hull"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^2.0.0",
+    "istanbul": "^0.4.5",
+    "jsdoc": "^3.5.5",
+    "mocha": "^4.0.1",
+    "nyc": "^11.2.1",
+    "transform": "^1.1.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "vinyl-transform": "^1.0.0",
+    "flo-vector2d": "^0.0.1"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "build": "cd build && gulp",
+    "coverage": "nyc --reporter=html --reporter=text mocha --compilers js:babel-core/register ./test/js",
+    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
+    "jsdoc": "cd docs && jsdoc --template jsdoc-json --destination doc.json -c conf.json",
+    "test": "npm run build && npm run test-only",
+    "test-only": "mocha --compilers js:babel-core/register ./test/js"
+  }
+}

@@ -1,0 +1,5 @@
+.nyc_output
+.npm-debug.log
+.coveralls.yml
+coverage
+node_modules
