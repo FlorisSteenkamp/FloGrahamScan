@@ -4,6 +4,7 @@ let Vector = require('flo-vector2d');
 
 let DELTA = 1e-10;
 
+
 /**
  * Performs a functional stable sort on the given array and 
  * returns the newly sorted array.
@@ -79,13 +80,13 @@ function getSmallestIndxYThenX(ps) {
  * </p>
  * @param {number[][]} ps_ - A set of points
  * @param {boolean} includeAllBoundaryPoints - Set this to true to if all boundary points
- * should be returned, even redundant ones
+ * should be returned, even redundant ones - defaults to false
  * @param {number} delta - Tolerance at which three points are considered collinear -
  * defaults to 1e-10
  * @returns {number[][]}
  */
 function grahamScan(ps_, includeAllBoundaryPoints, delta) {
-	
+	includeAllBoundaryPoints = !!includeAllBoundaryPoints;
 	delta = (delta === undefined) ? DELTA : delta;
 
 	function fail(p1, p2, p3) {
