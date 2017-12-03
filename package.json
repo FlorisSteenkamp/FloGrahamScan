@@ -1,7 +1,7 @@
 {
   "name": "flo-graham-scan",
   "description": "Function that finds the convex hull of a set of points via the Graham Scan algorithm.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Floris Steenkamp"
   },
@@ -46,7 +46,7 @@
     "nyc": "^11.2.1",
     "transform": "^1.1.2",
     "tsify": "^3.0.3",
-    "typescript": "^2.6.1",        
+    "typescript": "^2.6.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0"
@@ -57,7 +57,7 @@
   "scripts": {
     "build": "gulp",
     "build-node": "gulp node",
-    "build-browser": "gulp browser",        
+    "build-browser": "gulp browser",
     "coverage": "nyc --reporter=html --reporter=text mocha --compilers js:babel-core/register ./test/js",
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
     "jsdoc": "cd docs && jsdoc --template jsdoc-json --destination doc.json -c conf.json",
@@ -65,6 +65,15 @@
     "test-only": "mocha --compilers js:babel-core/register ./test/js"
   },
   "browserify": {
-    "transform": [["babelify", { "presets": ["env"] }]]
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "env"
+          ]
+        }
+      ]
+    ]
   }
 }
