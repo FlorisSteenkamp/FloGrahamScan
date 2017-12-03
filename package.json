@@ -6,7 +6,8 @@
     "name": "Floris Steenkamp"
   },
   "license": "MIT",
-  "main": "dist/flo-graham-scan.js",
+  "main": "node/index.js",
+  "typings": "node/index",
   "private": false,
   "repository": {
     "type": "git",
@@ -21,7 +22,9 @@
     "convex",
     "hull"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "flo-vector2d": "*"
+  },
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-core": "^6.26.0",
@@ -30,30 +33,38 @@
     "browserify": "^13.1.0",
     "chai": "^4.1.2",
     "coveralls": "^3.0.0",
+    "gulp-derequire": "^2.1.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.6.0",
+    "gulp-typescript": "^3.2.3",
     "gulp-uglify": "^2.0.0",
     "istanbul": "^0.4.5",
     "jsdoc": "^3.5.5",
     "mocha": "^4.0.1",
     "nyc": "^11.2.1",
     "transform": "^1.1.2",
+    "tsify": "^3.0.3",
+    "typescript": "^2.6.1",        
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "vinyl-transform": "^1.0.0",
-    "flo-vector2d": "^0.0.1"
+    "vinyl-transform": "^1.0.0"
   },
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "build": "cd build && gulp",
+    "build": "gulp",
+    "build-node": "gulp node",
+    "build-browser": "gulp browser",        
     "coverage": "nyc --reporter=html --reporter=text mocha --compilers js:babel-core/register ./test/js",
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
     "jsdoc": "cd docs && jsdoc --template jsdoc-json --destination doc.json -c conf.json",
     "test": "npm run build && npm run test-only",
     "test-only": "mocha --compilers js:babel-core/register ./test/js"
+  },
+  "browserify": {
+    "transform": [["babelify", { "presets": ["env"] }]]
   }
 }

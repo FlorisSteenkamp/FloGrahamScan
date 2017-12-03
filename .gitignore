@@ -3,3 +3,4 @@
 .coveralls.yml
 coverage
 node_modules
+c.bat

@@ -1,9 +1,9 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.FloGrahamScan = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.FloGrahamScan = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-var Vector = require('flo-vector2d');
+var Vector = _dereq_('flo-vector2d');
 
 var DELTA = 1e-10;
 
@@ -77,13 +77,13 @@ function getSmallestIndxYThenX(ps) {
  * </p>
  * @param {number[][]} ps_ - A set of points
  * @param {boolean} includeAllBoundaryPoints - Set this to true to if all boundary points
- * should be returned, even redundant ones
+ * should be returned, even redundant ones - defaults to false
  * @param {number} delta - Tolerance at which three points are considered collinear -
  * defaults to 1e-10
  * @returns {number[][]}
  */
 function grahamScan(ps_, includeAllBoundaryPoints, delta) {
-
+	includeAllBoundaryPoints = !!includeAllBoundaryPoints;
 	delta = delta === undefined ? DELTA : delta;
 
 	function fail(p1, p2, p3) {
@@ -144,68 +144,27 @@ function grahamScan(ps_, includeAllBoundaryPoints, delta) {
 
 module.exports = grahamScan;
 
-},{"flo-vector2d":2}],2:[function(require,module,exports){
-(function (global){
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.FloVector2d = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+},{"flo-vector2d":2}],2:[function(_dereq_,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var DELTA = 1e-10;
 
-/*
- * Purely functional 2d vector utilities.
+/** 
+ * Returns the dot (inner) product between two 2-vectors. 
+ * @param {number} a - The first vector
+ * @param {number} b - The second vector
+ * @returns {number}
  */
-var Vector = {
-	dot: dot,
-	cross: cross,
-	ccw: ccw,
-	segSegIntersection: segSegIntersection,
-	doesSegSegIntersect: doesSegSegIntersect,
-	squaredDistanceBetween: squaredDistanceBetween,
-	scale: scale,
-	reverse: reverse,
-	toUnitVector: toUnitVector,
-	toLength: toLength,
-	fromTo: fromTo,
-	interpolate: interpolate,
-	mean: mean,
-	distanceBetween: distanceBetween,
-	length: length,
-	lengthSquared: lengthSquared,
-	manhattanDistanceBetween: manhattanDistanceBetween,
-	manhattanLength: manhattanLength,
-	distanceBetweenPointAndLine: distanceBetweenPointAndLine,
-	squaredDistanceBetweenPointAndLineSegment: squaredDistanceBetweenPointAndLineSegment,
-	circumCenter: circumCenter,
-	inCenter: inCenter,
-	centroid: centroid,
-	equal: equal,
-	rotate: rotate,
-	reverseRotate: reverseRotate,
-	rotateBy90Degrees: rotateBy90Degrees,
-	rotateByNeg90Degrees: rotateByNeg90Degrees,
-	transform: transform,
-	getClosestTo: getClosestTo,
-	translatePoints: translatePoints,
-	rotatePoints: rotatePoints,
-	translateThenRotatePoints: translateThenRotatePoints,
-	rotateThenTranslatePoints: rotateThenTranslatePoints
-
-	/** 
-  * Returns the dot (inner) product between two 2-vectors. 
-  * @param {number} a - The first vector
-  * @param {number} b - The second vector
-  * @returns {number}
-  */
-};function dot(a, b) {
+function dot(a, b) {
 	return a[0] * b[0] + a[1] * b[1];
 }
 
 /** 
  * Returns the cross product signed magnitude between two 2-vectors.
- * @param {number} a - The first vector
- * @param {number} b - The second vector
+ * @param {number[]} a - The first vector
+ * @param {number[]} b - The second vector
  * @returns {number}
  */
 function cross(a, b) {
@@ -220,7 +179,7 @@ function cross(a, b) {
  * @param {number[]} p1 - The first point
  * @param {number[]} p2 - The second point
  * @param {number[]} p3 - The third point
- * @param {number} delta - The tolerance at which the three points are 
+ * @param {number} [delta] - The tolerance at which the three points are 
  * considered colinear - defaults to 1e-10
  * @returns {number}
  */
@@ -241,7 +200,7 @@ function ccw(p1, p2, p3, delta) {
  * </p> 
  * @param {number[][]} ab - The first line 
  * @param {number[][]} cd - The second line
- * @param {number} delta - The tolerance at which the lines are considered 
+ * @param {number} [delta] - The tolerance at which the lines are considered 
  * parallel - defaults to 1e-10
  * @returns {number[]} The point where the two line segments intersect  
  * or undefined if they don't intersect or a line if they intersect at 
@@ -324,7 +283,7 @@ function scale(p, factor) {
 }
 
 /**
- * Returns the 2-vector reversed.
+ * Returns the given 2-vector reversed.
  * @param {number[]} p 
  * @returns {number[]}
  */
@@ -349,8 +308,8 @@ function toUnitVector(p) {
  * @param {number} length 
  * @returns {number[]}
  */
-function toLength(p, length) {
-	var scaleFactor = length / length(p);
+function toLength(p, len) {
+	var scaleFactor = len / length(p);
 
 	return [p[0] * scaleFactor, p[1] * scaleFactor];
 }
@@ -440,31 +399,37 @@ function manhattanLength(p) {
  * Returns the distance between the given point and line. 
  * </p>
  * <p>
- * See https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#Line_defined_by_two_points 
+ * See <a href="https://en.wikipedia.org/wiki/Distance_from_a_point_to_a_line#Line_defined_by_two_points">
+ * this Wikipedia article</a>
  * </p>
  * @param {number[]} p - A point
  * @param {number[][]} l - A line
  * @returns {number}
  */
 function distanceBetweenPointAndLine(p, l) {
-	var x0 = p[0];
-	var y0 = p[1];
-	var x1 = l[0][0];
-	var y1 = l[0][1];
-	var x2 = l[1][0];
-	var y2 = l[1][1];
+	var _p = _slicedToArray(p, 2),
+	    x0 = _p[0],
+	    y0 = _p[1];
 
-	var y2_y1 = y2 - y1;
-	var x2_x1 = x2 - x1;
+	var _l = _slicedToArray(l, 2),
+	    _l$ = _slicedToArray(_l[0], 2),
+	    x1 = _l$[0],
+	    y1 = _l$[1],
+	    _l$2 = _slicedToArray(_l[1], 2),
+	    x2 = _l$2[0],
+	    y2 = _l$2[1];
 
-	var numerator = y2_y1 * x0 - x2_x1 * y0 + x2 * y1 - y2 * x1;
-	var denominator = Math.sqrt(y2_y1 * y2_y1 + x2_x1 * x2_x1);
+	var y = y2 - y1;
+	var x = x2 - x1;
 
-	return Math.abs(numerator / denominator);
+	var a = y * x0 - x * y0 + x2 * y1 - y2 * x1;
+	var b = Math.sqrt(x * x + y * y);
+
+	return Math.abs(a / b);
 }
 
 /**
- * Return the squared distance between the given point and line segment. 
+ * Returns the squared distance between the given point and line segment. 
  * @param {number[]} p - A point
  * @param {number[][]} l - A line
  * @returns {number}
@@ -497,13 +462,13 @@ function circumCenter(triangle) {
 	var p2 = triangle[1];
 	var p3 = triangle[2];
 
-	var Sx = 0.5 * det3([squaredNorm(p1), p1[1], 1], [squaredNorm(p2), p2[1], 1], [squaredNorm(p3), p3[1], 1]);
+	var Sx = 0.5 * det3([lengthSquared(p1), p1[1], 1], [lengthSquared(p2), p2[1], 1], [lengthSquared(p3), p3[1], 1]);
 
-	var Sy = 0.5 * det3([p1[0], squaredNorm(p1), 1], [p2[0], squaredNorm(p2), 1], [p3[0], squaredNorm(p3), 1]);
+	var Sy = 0.5 * det3([p1[0], lengthSquared(p1), 1], [p2[0], lengthSquared(p2), 1], [p3[0], lengthSquared(p3), 1]);
 
 	var a = det3([p1[0], p1[1], 1], [p2[0], p2[1], 1], [p3[0], p3[1], 1]);
 
-	var b = det3([p1[0], p1[1], squaredNorm(p1)], [p2[0], p2[1], squaredNorm(p2)], [p3[0], p3[1], squaredNorm(p3)]);
+	var b = det3([p1[0], p1[1], lengthSquared(p1)], [p2[0], p2[1], lengthSquared(p2)], [p3[0], p3[1], lengthSquared(p3)]);
 
 	return [Sx / a, Sy / a];
 }
@@ -555,19 +520,19 @@ function centroid(polygon) {
 	var A = 0;
 	for (var i = 0; i < polygon.length; i++) {
 		var p0 = polygon[i];
-		var _p = i === polygon.length - 1 ? polygon[0] : polygon[i + 1];
+		var _p2 = i === polygon.length - 1 ? polygon[0] : polygon[i + 1];
 
-		A = A + (p0[0] * _p[1] - _p[0] * p0[1]);
+		A = A + (p0[0] * _p2[1] - _p2[0] * p0[1]);
 	}
 	A = A / 2;
 
 	var C = [0, 0];
 	for (var _i = 0; _i < polygon.length; _i++) {
-		var _p2 = polygon[_i];
-		var _p3 = _i === polygon.length - 1 ? polygon[0] : polygon[_i + 1];
+		var _p3 = polygon[_i];
+		var _p4 = _i === polygon.length - 1 ? polygon[0] : polygon[_i + 1];
 
-		C[0] = C[0] + (_p2[0] + _p3[0]) * (_p2[0] * _p3[1] - _p3[0] * _p2[1]);
-		C[1] = C[1] + (_p2[1] + _p3[1]) * (_p2[0] * _p3[1] - _p3[0] * _p2[1]);
+		C[0] = C[0] + (_p3[0] + _p4[0]) * (_p3[0] * _p4[1] - _p4[0] * _p3[1]);
+		C[1] = C[1] + (_p3[1] + _p4[1]) * (_p3[0] * _p4[1] - _p4[0] * _p3[1]);
 	}
 
 	return [C[0] / (6 * A), C[1] / (6 * A)];
@@ -575,6 +540,7 @@ function centroid(polygon) {
 
 /**
  * Calculate the determinant of three 3-vectors, i.e. 3x3 matrix
+ * @ignore
  * @param {number[]} x 
  * @param {number[]} y
  * @param {number[]} z
@@ -585,13 +551,87 @@ function det3(x, y, z) {
 }
 
 /**
- * Returns the result of adding two 2-vectors.
+ * Returns the result of adding two 2-vectors. This function is curried.
  * @param {number[]} a - A vector
  * @param {number[]} b - Another vector
  * @param {number[]}
  */
-function add(a, b) {
-	return [a[0] + b[0], a[1] + b[1]];
+function translate(a, b) {
+	function f(b) {
+		return [a[0] + b[0], a[1] + b[1]];
+	}
+
+	// Curry the function
+	return b === undefined ? f : f(b);
+}
+
+/**
+ * Creates a transformation function that operates on multiple points from the 
+ * given arity two function.
+ * @ignore
+ */
+function createCurriedFunctionArity2(f) {
+	return function (a, ps) {
+		var f1 = f(a); // Cache for speed
+		var fPs = function fPs(ps) {
+			return ps.map(f1);
+		};
+
+		// Curry the function
+		return ps === undefined ? fPs : fPs(ps);
+	};
+}
+
+/**
+ * Creates a transformation function that operates on multiple points from the 
+ * given curried arity three function.
+ * @ignore
+ */
+function createCurriedFunctionArity3(f) {
+	return function (a, b, ps) {
+		var f2 = f(a, b); // Cache for speed
+		var fPs = function fPs(ps) {
+			return ps.map(f2);
+		};
+
+		// Curry the function
+		return ps === undefined ? fPs : fPs(ps);
+	};
+}
+
+/**
+ * Return the given 2d points translated by the given 2d vector. This function
+ * is curried.
+ * @param {number} sinθ
+ * @param {number} cosθ
+ * @param {number[][]} ps 
+ * @returns {number[][]}
+ */
+var rotatePs = createCurriedFunctionArity3(rotate);
+
+/**
+ * Return the given 2d points translated by the given 2d vector. This function
+ * is curried.
+ * @param {number[]} v 
+ * @param {number[][]} ps 
+ * @returns {number[][]}
+ */
+var translatePs = createCurriedFunctionArity2(translate);
+
+/**
+ * Returns a rotated version of the given 2-vector given the sine and cosine of the angle.
+ * @param {number} sinθ
+ * @param {number} cosθ
+ * @param {number[]} p
+ * @returns {number[]}
+ */
+function rotate(sinθ, cosθ, p) {
+	function rotateByθ(p) {
+		return [p[0] * cosθ - p[1] * sinθ, p[0] * sinθ + p[1] * cosθ];
+	}
+
+	// Curry the function
+	return p === undefined ? rotate : rotateByθ(p);
 }
 
 /**
@@ -605,24 +645,14 @@ function equal(a, b) {
 }
 
 /**
- * Returns a rotated version of the given 2-vector given the sine and cosine of the angle.
- * @param {number[]} p 
- * @param {number} sinAngle 
- * @param {number} cosAngle 
- * @returns {number[]}
- */
-function rotate(p, sinAngle, cosAngle) {
-	return [p[0] * cosAngle - p[1] * sinAngle, p[0] * sinAngle + p[1] * cosAngle];
-}
-
-/**
- * Returns a anti-clockwise rotated version of the given 2-vector given the sine and cosine of the angle.
+ * Returns a anti-clockwise rotated version of the given 2-vector given the sine 
+ * and cosine of the angle.
  * @param {number[]} p 
  * @param {number} sinθ
  * @param {number} cosθ
  * @returns {number[]}
  */
-function reverseRotate(p, sinθ, cosθ) {
+function reverseRotate(sinθ, cosθ, p) {
 	return [+p[0] * cosθ + p[1] * sinθ, -p[0] * sinθ + p[1] * cosθ];
 }
 
@@ -631,7 +661,7 @@ function reverseRotate(p, sinθ, cosθ) {
  * @param {number[]} p 
  * @returns {number[]}
  */
-function rotateBy90Degrees(p) {
+function rotate90Degrees(p) {
 	return [-p[1], p[0]];
 }
 
@@ -640,7 +670,7 @@ function rotateBy90Degrees(p) {
  * @param {number[]} p 
  * @returns {number[]}
  */
-function rotateByNeg90Degrees(p) {
+function rotateNeg90Degrees(p) {
 	return [p[1], -p[0]];
 }
 
@@ -678,73 +708,76 @@ function getClosestTo(p, ps, f) {
 	return cp;
 }
 
-/**
- * Return the given 2d points translated by the given 2d vector.
- * @param {number[][]} ps 
- * @param {number[]} v 
- * @returns {number[][]}
- */
-function translatePoints(ps, v) {
-	// SLOW!
-	/*return ps.map(function(p) {
- 	//return add(p, v);
- 	return [p[0]+v[0], p[1]+v[1]]; 
- });*/
-
-	// FAST! (at least on V8, BUT WHY?!)
-	var result = [];
-	for (var i = 0; i < ps.length; i++) {
-		result.push([ps[i][0] + v[0], ps[i][1] + v[1]]);
-	}
-
-	return result;
-}
-
-/**
- * Returns the given points rotated by a given angle given as the sine and cosine of the angle.
- * @param {number[][]} ps 
- * @param {number} sinθ 
- * @param {number} cosθ
- * @returns {number[][]}
- */
-function rotatePoints(ps, sinθ, cosθ) {
-	return ps.map(function (p) {
-		return rotate(p, sinθ, cosθ);
-	});
-}
-
 /** 
  * Returns an array of points by applying a translation and then rotation to the given points.
- * @param {number[][]} ps - The input points
- * @param {number[]} t - The translation vector
+ * @param {number[]} v - The translation vector
  * @param {number} sinθ 
  * @param {number} cosθ
+ * @param {number[][]} ps - The input points
  * @returns {number[][]}
  **/
-function translateThenRotatePoints(ps, t, sinθ, cosθ) {
+function translateThenRotatePs(v, sinθ, cosθ, ps) {
 	return ps.map(function (p) {
-		return rotate(add(p, t), sinθ, cosθ);
+		return rotate(sinθ, cosθ, translate(v, p));
 	});
 }
 
 /** 
  * Returns an array of points by applying a rotation and then translation to the given points.
- * @param {number[][]} ps - The input points
- * @param {number[]} t - The translation vector
  * @param {number} sinθ 
  * @param {number} cosθ
+ * @param {number[]} v - The translation vector
+ * @param {number[][]} ps - The input points
  * @returns {number[][]}
  **/
-function rotateThenTranslatePoints(ps, t, sinθ, cosθ) {
+function rotateThenTranslatePs(sinθ, cosθ, v, ps) {
 	return ps.map(function (p) {
-		return add(rotate(p, sinθ, cosθ), t);
+		return translate(v, rotate(sinθ, cosθ, p));
 	});
 }
 
+/*
+ * Purely functional 2d vector utilities.
+ */
+var Vector = {
+	dot: dot,
+	cross: cross,
+	ccw: ccw,
+	segSegIntersection: segSegIntersection,
+	doesSegSegIntersect: doesSegSegIntersect,
+	squaredDistanceBetween: squaredDistanceBetween,
+	scale: scale,
+	reverse: reverse,
+	translate: translate,
+	toUnitVector: toUnitVector,
+	toLength: toLength,
+	fromTo: fromTo,
+	interpolate: interpolate,
+	mean: mean,
+	distanceBetween: distanceBetween,
+	length: length,
+	lengthSquared: lengthSquared,
+	manhattanDistanceBetween: manhattanDistanceBetween,
+	manhattanLength: manhattanLength,
+	distanceBetweenPointAndLine: distanceBetweenPointAndLine,
+	squaredDistanceBetweenPointAndLineSegment: squaredDistanceBetweenPointAndLineSegment,
+	circumCenter: circumCenter,
+	inCenter: inCenter,
+	centroid: centroid,
+	equal: equal,
+	rotate: rotate,
+	rotatePs: rotatePs,
+	reverseRotate: reverseRotate,
+	rotate90Degrees: rotate90Degrees,
+	rotateNeg90Degrees: rotateNeg90Degrees,
+	transform: transform,
+	getClosestTo: getClosestTo,
+	translatePs: translatePs,
+	translateThenRotatePs: translateThenRotatePs,
+	rotateThenTranslatePs: rotateThenTranslatePs
+};
+
 module.exports = Vector;
 
-},{}]},{},[1])(1)
-});
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}]},{},[1])(1)
 });
