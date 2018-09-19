@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const flo_vector2d_1 = require("flo-vector2d");
+const Vector = require("flo-vector2d");
 const DELTA = 1e-10;
 /**
  * Performs a functional stable sort on the given array and
@@ -73,7 +73,7 @@ function getSmallestIndxYThenX(ps) {
 function grahamScan(ps_, includeAllBoundaryPoints = false, delta = DELTA) {
     includeAllBoundaryPoints = !!includeAllBoundaryPoints;
     function fail(p1, p2, p3) {
-        let res = flo_vector2d_1.default.ccw(p1, p2, p3, delta);
+        let res = Vector.ccw(p1, p2, p3, delta);
         if (includeAllBoundaryPoints) {
             return res < 0;
         }
@@ -84,7 +84,7 @@ function grahamScan(ps_, includeAllBoundaryPoints = false, delta = DELTA) {
     let idx = getSmallestIndxYThenX(ps);
     let [p] = ps.splice(idx, 1);
     ps = stableSort(ps, function (a, b) {
-        let res = flo_vector2d_1.default.cross(flo_vector2d_1.default.fromTo(p, b), flo_vector2d_1.default.fromTo(p, a));
+        let res = Vector.cross(Vector.fromTo(p, b), Vector.fromTo(p, a));
         res = Math.abs(res) < delta ? 0 : res;
         if (res !== 0) {
             return res;

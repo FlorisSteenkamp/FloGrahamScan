@@ -1,5 +1,5 @@
 
-import Vector from 'flo-vector2d';
+import * as Vector from 'flo-vector2d';
 
 const DELTA = 1e-10;
 
