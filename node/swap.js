@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.swap = void 0;
 /**
  * In-place swap two elements in the given array.
  * @ignore

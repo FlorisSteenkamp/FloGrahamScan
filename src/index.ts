@@ -1,5 +1,5 @@
 
-import { orient2d } from 'flo-numerical';
+import { orient2d } from 'big-float-ts';
 import { getSmallestIndxYThenX } from './get-smallest-indx-y-then-x';
 import { swap } from './swap';
 

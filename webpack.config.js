@@ -21,5 +21,12 @@ module.exports = {
         path: path.resolve(__dirname, 'browser'),
         library: 'FloGrahamScan',
         libraryTarget: 'var'
+    },
+    stats: {
+        // Don't display anything, then display colors, ...
+        all: false,
+        colors: true,
+        errors: true,
+        builtAt: true
     }
 };

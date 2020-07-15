@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const flo_numerical_1 = require("flo-numerical");
+exports.grahamScan = void 0;
+const big_float_ts_1 = require("big-float-ts");
 const get_smallest_indx_y_then_x_1 = require("./get-smallest-indx-y-then-x");
 const swap_1 = require("./swap");
 /**
@@ -19,7 +20,7 @@ function grahamScan(ps, includeAllBoundaryPoints = false) {
         return undefined;
     }
     function fail(p1, p2, p3) {
-        let res = flo_numerical_1.orient2d(p1, p2, p3);
+        let res = big_float_ts_1.orient2d(p1, p2, p3);
         return includeAllBoundaryPoints
             ? res < 0
             : res <= 0;
@@ -29,7 +30,7 @@ function grahamScan(ps, includeAllBoundaryPoints = false) {
     let idx = get_smallest_indx_y_then_x_1.getSmallestIndxYThenX(ps_);
     let [p] = ps_.splice(idx, 1);
     ps_.sort((a, b) => {
-        let res = -flo_numerical_1.orient2d(p, a, b);
+        let res = -big_float_ts_1.orient2d(p, a, b);
         if (res !== 0) {
             return res;
         }
