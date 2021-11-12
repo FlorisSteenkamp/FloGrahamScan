@@ -1,7 +1,6 @@
-
 import { assert, expect } from 'chai';
 import { describe } from 'mocha';
-import { grahamScan } from '../src/index';
+import { grahamScan } from '../src/index.js';
 
 
 describe('graham scan', function() {

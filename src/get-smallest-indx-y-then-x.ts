@@ -1,6 +1,6 @@
 
 /**
- * @private
+ * @internal
  */
 function getSmallestIndxYThenX(ps: number[][]): number | undefined {
 	let smallest = [

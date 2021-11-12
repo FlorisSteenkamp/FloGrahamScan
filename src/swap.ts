@@ -1,7 +1,8 @@
 
 /**
  * In-place swap two elements in the given array.
- * @ignore
+ * 
+ * @internal
  */
 function swap<T>(arr: T[], a: number, b: number): void {
 	if (a === b) { return; }

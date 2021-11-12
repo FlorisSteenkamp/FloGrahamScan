@@ -3,3 +3,4 @@ npm-debug.log
 papers
 node_modules
 c.bat
+coverage/

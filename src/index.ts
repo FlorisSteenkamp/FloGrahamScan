@@ -1,7 +1,6 @@
-
 import { orient2d } from 'big-float-ts';
-import { getSmallestIndxYThenX } from './get-smallest-indx-y-then-x';
-import { swap } from './swap';
+import { getSmallestIndxYThenX } from './get-smallest-indx-y-then-x.js';
+import { swap } from './swap.js';
 
 
 /** 

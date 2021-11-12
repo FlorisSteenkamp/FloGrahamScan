@@ -1,4 +1,3 @@
-
 // As of 2018-10-16, Chrome release 70, all major browsers has stable-sort so
 // we can just use the built-in sort. Also, the ECMAScript 2019 now requires
 // a stable sort when using Array.sort.
