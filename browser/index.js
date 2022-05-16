@@ -1972,9 +1972,10 @@ function swap(arr, a, b) {
  *
  * Robust: This algorithm is robust via adaptive infinite precision floating
  * point arithmetic.
+ *
  * @param ps A set of points
  * @param includeAllBoundaryPoints Set this to true to if all boundary points
- * should be returned, even redundant ones - defaults to false
+ * should be returned, even redundant ones - defaults to `false`
  */
 function grahamScan(ps, includeAllBoundaryPoints = false) {
     if (!ps.length) {

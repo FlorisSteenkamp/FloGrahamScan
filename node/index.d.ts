@@ -5,9 +5,10 @@
  *
  * Robust: This algorithm is robust via adaptive infinite precision floating
  * point arithmetic.
+ *
  * @param ps A set of points
  * @param includeAllBoundaryPoints Set this to true to if all boundary points
- * should be returned, even redundant ones - defaults to false
+ * should be returned, even redundant ones - defaults to `false`
  */
 declare function grahamScan(ps: number[][], includeAllBoundaryPoints?: boolean): number[][] | undefined;
 export { grahamScan };
