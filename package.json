@@ -1,7 +1,7 @@
 {
     "name": "flo-graham-scan",
     "description": "Function that finds the convex hull of a set of points via the Graham Scan algorithm.",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "author": {
         "name": "Floris Steenkamp"
     },
