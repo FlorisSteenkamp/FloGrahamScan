@@ -18,15 +18,15 @@ function grahamScan(ps, includeAllBoundaryPoints = false) {
         return undefined;
     }
     function fail(p1, p2, p3) {
-        let res = orient2d(p1, p2, p3);
+        const res = orient2d(p1, p2, p3);
         return includeAllBoundaryPoints
             ? res < 0
             : res <= 0;
     }
-    let ps_ = ps.slice();
-    let n = ps_.length;
-    let idx = getSmallestIndxYThenX(ps_);
-    let [p] = ps_.splice(idx, 1);
+    const ps_ = ps.slice();
+    const n = ps_.length;
+    const idx = getSmallestIndxYThenX(ps_);
+    const [p] = ps_.splice(idx, 1);
     ps_.sort((a, b) => {
         let res = -orient2d(p, a, b);
         if (res !== 0) {

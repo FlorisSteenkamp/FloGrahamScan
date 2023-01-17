@@ -7,7 +7,7 @@ function swap(arr, a, b) {
     if (a === b) {
         return;
     }
-    let temp = arr[a];
+    const temp = arr[a];
     arr[a] = arr[b];
     arr[b] = temp;
 }

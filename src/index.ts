@@ -17,23 +17,23 @@ import { swap } from './swap.js';
  */
 function grahamScan(
 		ps: number[][], 
-		includeAllBoundaryPoints: boolean = false): number[][] | undefined {
+		includeAllBoundaryPoints = false): number[][] | undefined {
 		
 	if (!ps.length) { return undefined; }
 
 	function fail(p1: number[], p2: number[], p3: number[]) {
-		let res = orient2d(p1, p2, p3);
+		const res = orient2d(p1, p2, p3);
 		return includeAllBoundaryPoints
 			? res < 0
 			: res <= 0;
 	}
 
-	let ps_ = ps.slice();
-	let n = ps_.length;
+	const ps_ = ps.slice();
+	const n = ps_.length;
 
-	let idx = getSmallestIndxYThenX(ps_)!;
+	const idx = getSmallestIndxYThenX(ps_)!;
 
-	let [p] = ps_.splice(idx, 1);
+	const [p] = ps_.splice(idx, 1);
 
 	ps_.sort((a,b) => {
 		let res = -orient2d(p, a , b);

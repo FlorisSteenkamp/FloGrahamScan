@@ -9,7 +9,7 @@ function getSmallestIndxYThenX(ps: number[][]): number | undefined {
 	];
 	let smallestI: number | undefined = undefined;
 	for (let i=0; i<ps.length; i++) {
-		let y = ps[i][1];
+		const y = ps[i][1];
 		if ((y < smallest[1]) || 
 		    (y === smallest[1] && ps[i][0] < smallest[0])) {
 

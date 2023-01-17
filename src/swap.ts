@@ -7,7 +7,7 @@
 function swap<T>(arr: T[], a: number, b: number): void {
 	if (a === b) { return; }
 	
-	let temp = arr[a];
+	const temp = arr[a];
 	arr[a] = arr[b];
 	arr[b] = temp;	
 }
