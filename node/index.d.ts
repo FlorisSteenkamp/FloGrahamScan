@@ -10,5 +10,5 @@
  * @param includeAllBoundaryPoints Set this to true to if all boundary points
  * should be returned, even redundant ones - defaults to `false`
  */
-declare function grahamScan(ps: number[][], includeAllBoundaryPoints?: boolean): number[][] | undefined;
+declare function grahamScan(ps: number[][]): number[][] | undefined;
 export { grahamScan };

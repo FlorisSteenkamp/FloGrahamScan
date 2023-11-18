@@ -1,5 +1,5 @@
 import { orient2d } from 'big-float-ts';
-import { getSmallestIndxYThenX } from './get-smallest-indx-y-then-x.js';
+import { getSmallestIdxYThenX } from './get-smallest-idx-y-then-x.js';
 import { swap } from './swap.js';
 
 
@@ -16,27 +16,20 @@ import { swap } from './swap.js';
  * should be returned, even redundant ones - defaults to `false`
  */
 function grahamScan(
-		ps: number[][], 
-		includeAllBoundaryPoints = false): number[][] | undefined {
+		ps: number[][]): number[][] | undefined {
 		
-	if (!ps.length) { return undefined; }
+	const n = ps.length;
 
-	function fail(p1: number[], p2: number[], p3: number[]) {
-		const res = orient2d(p1, p2, p3);
-		return includeAllBoundaryPoints
-			? res < 0
-			: res <= 0;
-	}
+	if (n === 0) { return undefined; }
 
 	const ps_ = ps.slice();
-	const n = ps_.length;
 
-	const idx = getSmallestIndxYThenX(ps_)!;
+	const idx = getSmallestIdxYThenX(ps_)!;
 
 	const [p] = ps_.splice(idx, 1);
 
 	ps_.sort((a,b) => {
-		let res = -orient2d(p, a , b);
+		let res = -orient2d(p, a, b);
 		if (res !== 0) { return res; }
 		res = a[1] - b[1];
 		if (res !== 0) { return res; }
@@ -46,25 +39,53 @@ function grahamScan(
 
 	ps_.unshift(p);
 
-	let m = 1;
-	for (let i=2; i<n; i++) {
-		while (fail(ps_[m-1], ps_[m], ps_[i])) {
-			if (m > 1) {
-				m -= 1
-				continue;
-			} else if (i === n-1) {
-				m -= 1
-				break;
-			} else {
-				i += 1;
-			}
+	let stack: number[][] = [];
+	for (const p of ps_) {
+		while (stack.length > 1) {
+			const r = orient2d(
+				stack[stack.length-2],
+				stack[stack.length-1],
+				p
+			) <= 0;
+
+			if (!r) { break; }
+
+			stack.pop();
 		}
-		
-		m += 1;
-		swap(ps_, m, i);
+		stack.push(p);
 	}
 
-	return ps_.slice(0, m+1);
+	const len = stack.length;
+	const stack_ = [stack[0]];
+	for (let i=1; i<len; i++) {
+		const pS = stack[(i - 1)%len];
+		const pM = stack[(i    )%len];
+		const pE = stack[(i + 1)%len];
+
+		if (orient2d(pS,pM,pE) !== 0 || dot(pS,pM,pE) < 0) {
+			stack_.push(pM);
+		}
+	}
+
+	return stack_;
+}
+
+
+/**
+ * No need to be accurate
+ */
+function dot(
+		p1: number[],
+		p2: number[],
+		p3: number[]) {
+
+	const v1x = p2[0] - p1[0]
+	const v1y = p2[1] - p1[1];
+
+	const v2x = p3[0] - p2[0];
+	const v2y = p3[1] - p2[1];
+
+	return v1x*v2x + v1y*v2y;
 }
 
 

@@ -24,7 +24,7 @@ var __webpack_exports__ = {};
 
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, {
-  "T": () => (/* binding */ grahamScan)
+  T: () => (/* binding */ grahamScan)
 });
 
 ;// CONCATENATED MODULE: ./node_modules/big-float-ts/node/basic/two-product.js
@@ -437,11 +437,11 @@ function orient2dAdapt(A, B, C, detsum) {
 }
 
 //# sourceMappingURL=orient2d.js.map
-;// CONCATENATED MODULE: ./src/get-smallest-indx-y-then-x.ts
+;// CONCATENATED MODULE: ./src/get-smallest-idx-y-then-x.ts
 /**
  * @internal
  */
-function getSmallestIndxYThenX(ps) {
+function getSmallestIdxYThenX(ps) {
     let smallest = [
         Number.POSITIVE_INFINITY,
         Number.POSITIVE_INFINITY
@@ -459,24 +459,7 @@ function getSmallestIndxYThenX(ps) {
 }
 
 
-;// CONCATENATED MODULE: ./src/swap.ts
-/**
- * In-place swap two elements in the given array.
- *
- * @internal
- */
-function swap(arr, a, b) {
-    if (a === b) {
-        return;
-    }
-    const temp = arr[a];
-    arr[a] = arr[b];
-    arr[b] = temp;
-}
-
-
 ;// CONCATENATED MODULE: ./src/index.ts
-
 
 
 /**
@@ -491,19 +474,13 @@ function swap(arr, a, b) {
  * @param includeAllBoundaryPoints Set this to true to if all boundary points
  * should be returned, even redundant ones - defaults to `false`
  */
-function grahamScan(ps, includeAllBoundaryPoints = false) {
-    if (!ps.length) {
+function grahamScan(ps) {
+    const n = ps.length;
+    if (n === 0) {
         return undefined;
     }
-    function fail(p1, p2, p3) {
-        const res = orient2d(p1, p2, p3);
-        return includeAllBoundaryPoints
-            ? res < 0
-            : res <= 0;
-    }
     const ps_ = ps.slice();
-    const n = ps_.length;
-    const idx = getSmallestIndxYThenX(ps_);
+    const idx = getSmallestIdxYThenX(ps_);
     const [p] = ps_.splice(idx, 1);
     ps_.sort((a, b) => {
         let res = -orient2d(p, a, b);
@@ -517,25 +494,38 @@ function grahamScan(ps, includeAllBoundaryPoints = false) {
         return a[0] - b[0];
     });
     ps_.unshift(p);
-    let m = 1;
-    for (let i = 2; i < n; i++) {
-        while (fail(ps_[m - 1], ps_[m], ps_[i])) {
-            if (m > 1) {
-                m -= 1;
-                continue;
-            }
-            else if (i === n - 1) {
-                m -= 1;
+    let stack = [];
+    for (const p of ps_) {
+        while (stack.length > 1) {
+            const r = orient2d(stack[stack.length - 2], stack[stack.length - 1], p) <= 0;
+            if (!r) {
                 break;
             }
-            else {
-                i += 1;
-            }
+            stack.pop();
         }
-        m += 1;
-        swap(ps_, m, i);
+        stack.push(p);
     }
-    return ps_.slice(0, m + 1);
+    const len = stack.length;
+    const stack_ = [stack[0]];
+    for (let i = 1; i < len; i++) {
+        const pS = stack[(i - 1) % len];
+        const pM = stack[(i) % len];
+        const pE = stack[(i + 1) % len];
+        if (orient2d(pS, pM, pE) !== 0 || dot(pS, pM, pE) < 0) {
+            stack_.push(pM);
+        }
+    }
+    return stack_;
+}
+/**
+ * No need to be accurate
+ */
+function dot(p1, p2, p3) {
+    const v1x = p2[0] - p1[0];
+    const v1y = p2[1] - p1[1];
+    const v2x = p3[0] - p2[0];
+    const v2y = p3[1] - p2[1];
+    return v1x * v2x + v1y * v2y;
 }
 
 

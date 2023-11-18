@@ -1,0 +1,31 @@
+{
+    "name": "mat-tool",
+    "description": "CLI Tool for MAT/SAT.",
+    "version": "0.0.1",
+    "author": {
+        "name": "Floris Steenkamp"
+    },
+    "type": "module",
+    "main": "index.js",
+    "engines": {
+        "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+    },
+    "private": false,
+    "dependencies": {
+    },
+    "devDependencies": {
+        "source-map-loader": "^4.0.1",
+        "ts-loader": "^9.5.0",
+        "tsx": "^3.14.0",
+        "typescript": "^5.2.2",
+        "webpack": "^5.89.0",
+        "webpack-cli": "^5.1.4"
+    },
+    "scripts": {
+        "go": "npx tsx ./src/index.ts",
+        "gow": "cd dist & node ./index.cjs",
+        "build": "webpack",
+        "exe": "webpack & cd dist & pkg -t node18-win-x64 index.cjs --output mat.exe & cd..",
+        "run": "webpack & cd dist & pkg -t node18-win-x64 index.cjs --output mat.exe & mat.exe & cd.."
+    }
+}

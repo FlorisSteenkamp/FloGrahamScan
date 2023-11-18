@@ -1,7 +1,7 @@
 /**
  * @internal
  */
-function getSmallestIndxYThenX(ps) {
+function getSmallestIdxYThenX(ps) {
     let smallest = [
         Number.POSITIVE_INFINITY,
         Number.POSITIVE_INFINITY
@@ -17,5 +17,5 @@ function getSmallestIndxYThenX(ps) {
     }
     return smallestI;
 }
-export { getSmallestIndxYThenX };
-//# sourceMappingURL=get-smallest-indx-y-then-x.js.map
+export { getSmallestIdxYThenX };
+//# sourceMappingURL=get-smallest-idx-y-then-x.js.map

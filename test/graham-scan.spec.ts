@@ -4,7 +4,88 @@ import { grahamScan } from '../src/index.js';
 
 
 describe('graham scan', function() {
-	it('should robust do graham-scan', 
+    it('should do graham-scan by passing basic examples',
+    function() {
+        const ps1 = [[0,0], [1,0], [1,1], [0,1]];
+        const r1 = ps1;
+        test(ps1, r1);
+
+        const ps2 = [[0,0], [0.5,0], [1,0], [1,0.5], [1,1], [0.5,1], [0,1], [0,0.5]];
+        test(ps2, r1);
+
+        const ps3 = [[0,0], [0.5,0.0001], [1,0], [1,0.5], [1,1], [0.5,1], [0,1], [0,0.5]];
+        test(ps3, r1);
+
+        const ps4 = [[0,0], [0.5,-0.0001], [1,0], [1,0.5], [1,1], [0.5,1], [0,1], [0,0.5]];
+        test(ps4, [[0.5,-0.0001], [1,0], [1,1], [0,1], [0,0]]);
+
+        const square = [[0,0], [1,0], [1,1], [0,1]];
+        const ps5 = [[0,0], [1,0], [1,1], [0,1], [0,0.5]];
+        test(ps5, square);
+
+        const ps6 = [[0,0], [0.5,0], [1,0], [1,1], [0,1]];
+        test(ps6, square);
+
+        const ps7 = [[0,0], [0.17,0], [0.5,0], [1,0], [1,1], [0,1]];
+        test(ps7, square);
+
+        const ps8 = [[0,0], [0.5,0], [0.17,0], [1,0], [1,1], [0,1]];
+        test(ps8, square);
+
+        const ps9 = [
+            [0,0],
+            [0,0],
+            [0,0],
+            [0.5,0],
+            [0.17,0],
+            [1,0],
+            [1,0.33],
+            [1,0.34],
+            [1,0.34],
+            [1,1],
+            [0,1],
+            [0,1],
+            [0,1],
+            [0,1]
+        ];
+        test(ps9, square);
+
+        const psa = [
+            [0,0],
+            [0,0],
+            [0,0],
+            [0.17,0],
+            [1,0],
+            [1,0.33],
+            [0.5,0],
+            [1,0.34],
+            [1,0.34],
+            [1,1],
+            [0.44,1],
+            [0.45,1],
+            [0.44,1],
+            [0,1],
+            [0,0.33],
+            [0,1],
+            [0,0.55],
+            [0,1],
+            [0,1]
+        ];
+        test(psa, square);
+    });
+
+    it('should do graham-scan by passing with collinear points',
+    function() {
+        const ps1 = [[585,558], [586,559], [589,562], [590,565]];
+        const r1 = [[585,558],[589,562],[590,565]];
+        test(ps1, r1);
+
+        const ps2 = [[585,558], [586,559], [589,562], [594,567]];
+        const r2 = [[585,558],[594,567]];
+        test(ps2, r2);
+    });
+
+	it('should robustly do graham-scan by passing `Classroom Examples of Robustness Problems`',
 	function() {
         // Examples from Classroom Examples of Robustness Problems in Geometric Computations 
         // See https://people.mpi-inf.mpg.de/~mehlhorn/ftp/classroomExamplesNonrobustness.pdf
@@ -89,9 +170,12 @@ describe('graham scan', function() {
 });
 
 
-function test(ps: number[][], result: number[][]) {
+function test(
+        ps: number[][],
+        result: number[][]) {
+
     let hull = grahamScan(ps);
 
-    //console.log(hull);
+    console.log(hull);
     expect(hull).to.eql(result);
 }
