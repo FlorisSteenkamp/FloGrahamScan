@@ -64,9 +64,9 @@ function twoProduct(a, b) {
 
 //# sourceMappingURL=two-product.js.map
 ;// CONCATENATED MODULE: ./node_modules/big-float-ts/node/double-expansion/fast-expansion-sum.js
-
+// import { eCompress } from "./e-compress.js";
 // We *have* to do the below❗ The assignee is a getter❗ The assigned is a pure function❗
-const compress = (/* unused pure expression or super */ null && (eCompress));
+// const compress = eCompress;
 /**
  * Returns the result of adding two expansions.
  *
@@ -301,7 +301,7 @@ function twoDiff(a, b) {
  * magnitude. If h != 0, none of the h_i will be zero. Furthermore, the largest
  * component h_n approximates h with an error smaller than ulp(h_n).
  */
-function e_compress_eCompress(e) {
+function eCompress(e) {
     //return e;
     const e_ = e.slice();
     const m = e_.length;
@@ -432,7 +432,7 @@ function orient2dAdapt(A, B, C, detsum) {
     const e = fastExpansionSum(c, d);
     const f = eDiff(twoProduct(acxtail, bcytail), twoProduct(acytail, bcxtail));
     let D = fastExpansionSum(e, f);
-    D = e_compress_eCompress(D);
+    D = eCompress(D);
     return D[D.length - 1];
 }
 
