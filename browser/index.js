@@ -20,14 +20,8 @@
 /******/ })();
 /******/ 
 /************************************************************************/
-var __webpack_exports__ = {};
 
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  O: () => (/* binding */ grahamScan)
-});
-
-;// CONCATENATED MODULE: ./node_modules/big-float-ts/node/basic/two-product.js
+;// ./node_modules/big-float-ts/node/basic/two-product.js
 const f = 134217729; // 2**27 + 1;
 /**
  * Returns the exact result of multiplying two doubles.
@@ -63,7 +57,7 @@ function twoProduct(a, b) {
 }
 
 //# sourceMappingURL=two-product.js.map
-;// CONCATENATED MODULE: ./node_modules/big-float-ts/node/double-expansion/fast-expansion-sum.js
+;// ./node_modules/big-float-ts/node/double-expansion/fast-expansion-sum.js
 // import { eCompress } from "./e-compress.js";
 // We *have* to do the below❗ The assignee is a getter❗ The assigned is a pure function❗
 // const compress = eCompress;
@@ -208,7 +202,7 @@ function merge(e, f) {
 }
 
 //# sourceMappingURL=fast-expansion-sum.js.map
-;// CONCATENATED MODULE: ./node_modules/big-float-ts/node/double-expansion/e-negative-of.js
+;// ./node_modules/big-float-ts/node/double-expansion/e-negative-of.js
 /**
  * Returns the negative of the given floating point expansion.
  * * see [Shewchuk](https://people.eecs.berkeley.edu/~jrs/papers/robustr.pdf)
@@ -225,7 +219,7 @@ function eNegativeOf(e) {
 }
 
 //# sourceMappingURL=e-negative-of.js.map
-;// CONCATENATED MODULE: ./node_modules/big-float-ts/node/double-expansion/e-diff.js
+;// ./node_modules/big-float-ts/node/double-expansion/e-diff.js
 
 
 // We *have* to do the below❗ The assignee is a getter❗ The assigned is a pure function❗
@@ -245,7 +239,7 @@ function eDiff(e, f) {
 }
 
 //# sourceMappingURL=e-diff.js.map
-;// CONCATENATED MODULE: ./node_modules/big-float-ts/node/double-expansion/e-estimate.js
+;// ./node_modules/big-float-ts/node/double-expansion/e-estimate.js
 /**
  * Returns the result of the given floating point expansion rounded to a double
  * floating point number.
@@ -269,7 +263,7 @@ function eEstimate(e) {
 }
 
 //# sourceMappingURL=e-estimate.js.map
-;// CONCATENATED MODULE: ./node_modules/big-float-ts/node/basic/two-diff.js
+;// ./node_modules/big-float-ts/node/basic/two-diff.js
 /**
  * Returns the exact result of subtracting b from a (as a floating point
  * expansion).
@@ -284,7 +278,7 @@ function twoDiff(a, b) {
 }
 
 //# sourceMappingURL=two-diff.js.map
-;// CONCATENATED MODULE: ./node_modules/big-float-ts/node/double-expansion/e-compress.js
+;// ./node_modules/big-float-ts/node/double-expansion/e-compress.js
 /**
  * Returns the result of compressing the given floating point expansion.
  *
@@ -338,7 +332,7 @@ function eCompress(e) {
 }
 
 //# sourceMappingURL=e-compress.js.map
-;// CONCATENATED MODULE: ./node_modules/big-float-ts/node/geometric-primitives/orient2d.js
+;// ./node_modules/big-float-ts/node/geometric-primitives/orient2d.js
 
 
 
@@ -437,7 +431,7 @@ function orient2dAdapt(A, B, C, detsum) {
 }
 
 //# sourceMappingURL=orient2d.js.map
-;// CONCATENATED MODULE: ./src/get-smallest-idx-y-then-x.ts
+;// ./src/get-smallest-idx-y-then-x.ts
 /**
  * @internal
  */
@@ -459,7 +453,7 @@ function getSmallestIdxYThenX(ps) {
 }
 
 
-;// CONCATENATED MODULE: ./src/index.ts
+;// ./src/index.ts
 
 
 /**
@@ -566,5 +560,4 @@ function filterEqualPoints(ps) {
 }
 
 
-var __webpack_exports__grahamScan = __webpack_exports__.O;
-export { __webpack_exports__grahamScan as grahamScan };
+export { grahamScan };

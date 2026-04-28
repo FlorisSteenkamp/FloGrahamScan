@@ -1,4 +1,5 @@
-import { grahamScan } from "../../src/index.js";
+
+import { grahamScan } from "./node/index.js";
 
 
 function test() {
